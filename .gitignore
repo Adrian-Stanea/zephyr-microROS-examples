@@ -7,10 +7,10 @@
 .venv
 
 # build
-/build*
+**/build*
 /twister-out*
 
 __pycache__/
 
 # docs
-/doc/_build*
+**/doc/_build*

@@ -1,18 +1,25 @@
-# Copyright (c) 2021 Nordic Semiconductor ASA
-# SPDX-License-Identifier: Apache-2.0
-
 manifest:
   remotes:
     - name: adi
       url-base: https://github.com/analogdevicesinc/
+    - name: micro_ros
+      url-base: https://github.com/micro-ROS
+    - name: upstream
+      url-base: https://github.com/zephyrproject-rtos
+
 
   projects:
     - name: zephyr
-      remote: adi
-      revision: main
+      remote: upstream
+      revision: v4.1.0
       import:
         # By using name-allowlist we can clone only the modules that are
         # strictly needed by the application.
         name-allowlist:
           - cmsis      # required by the ARM port
           - hal_adi    # Analog Devices HAL
+    - name: libmicroros
+      # remote: micro_ros
+      revision: humble
+      path: modules/lib/micro_ros_zephyr_module
+      url: https://github.com/micro-ROS/micro_ros_zephyr_module.git

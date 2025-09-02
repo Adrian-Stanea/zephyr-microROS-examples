@@ -1,0 +1,83 @@
+# Copyright (c) 2024 Centro de Inovacao EDGE.
+# SPDX-License-Identifier: Apache-2.0
+
+# Copyright (c) 2025 Analog Devices, Inc.
+# SPDX-License-Identifier: Apache-2.0
+
+# =============================================================================
+# APPLICATION CONFIGURATION MENU
+# =============================================================================
+
+menu "ADC Sequence Publisher Configuration"
+
+menu "Hardware Configuration"
+
+config SEQUENCE_SAMPLES
+	int "Number of samples to be made on the sequence for each channel."
+	default 5
+	help
+	  Configure the number of samples to acquire for each ADC channel
+	  in a single sequence. Higher values provide better averaging but
+	  increase memory usage and processing time.
+
+config SEQUENCE_RESOLUTION
+	int "Set the resolution of the sequence readings in bits"
+	default 12
+	help
+	  Set the ADC resolution. Common values are:
+	  - 8 bits: 0-255 range
+	  - 10 bits: 0-1023 range
+	  - 12 bits: 0-4095 range
+	  - 16 bits: 0-65535 range
+
+
+config SEQUENCE_32BITS_REGISTERS
+	bool "ADC data sequences are on 32bits"
+	default n
+	help
+	  Enable this if your ADC uses 32-bit data registers.
+	  Most ADCs use 16-bit registers, but some high-resolution
+	  ADCs may require 32-bit storage.
+
+config SEQUENCE_ADC_SAMPLE_INTERVAL_US
+	int "Interval between samples in microseconds"
+	range 0 10000
+	default 0
+	help
+	  Time delay between consecutive samples in a sequence.
+	  Set to 0 for fastest possible sampling rate.
+	  Higher values reduce CPU load but decrease sampling rate.
+
+endmenu # ADC Hardware Configuration
+
+# ==============================================================================
+# PUBLISHER CONFIGURATION
+# ==============================================================================
+
+menu "Publisher Configuration"
+
+config TOPIC_PUBLISH_PERIOD_MS
+	int "Publishing period in milliseconds"
+	default 1000
+	help
+	  How often to publish ADC data to ROS topics.
+	  Lower values provide higher update rates but increase
+	  network traffic and CPU usage.
+
+config TOPIC_PREFIX
+	string "Topic name prefix"
+	default "adc"
+	help
+	  Prefix for all ADC topic names. Individual channels will be
+	  published to {prefix}/channel_{id} topics.
+
+endmenu # Publisher Configuration
+
+endmenu # ADC Sequence Publisher Configuration
+
+# Include main Zephyr Kconfig
+source "Kconfig.zephyr"
+
+module = APP
+module-str = APP
+source "subsys/logging/Kconfig.template.log_config"
