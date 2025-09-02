@@ -1,0 +1,2 @@
+# Load board Kconfig descriptions.
+osource "/home/bjh/zephyrproject/zephyr/boards/adi/apard32690/Kconfig.apard32690"

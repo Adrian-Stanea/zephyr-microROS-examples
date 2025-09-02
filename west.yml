@@ -1,0 +1,18 @@
+# Copyright (c) 2021 Nordic Semiconductor ASA
+# SPDX-License-Identifier: Apache-2.0
+
+manifest:
+  remotes:
+    - name: adi
+      url-base: https://github.com/analogdevicesinc/
+
+  projects:
+    - name: zephyr
+      remote: adi
+      revision: main
+      import:
+        # By using name-allowlist we can clone only the modules that are
+        # strictly needed by the application.
+        name-allowlist:
+          - cmsis      # required by the ARM port
+          - hal_adi    # Analog Devices HAL

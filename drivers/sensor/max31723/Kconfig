@@ -1,0 +1,10 @@
+# Copyright (c) 2021 Nordic Semiconductor ASA
+# SPDX-License-Identifier: Apache-2.0
+
+menuconfig MAX31723
+	bool "MAX31723 SPI Temperature Sensor"
+	default y
+	depends on DT_HAS_ADI_MAX31723_ENABLED
+	select SPI
+	help
+	  Enable MAX31723 SPI Temperature Sensor 
