@@ -1,0 +1,47 @@
+# version: '3.8'
+
+services:
+  micro-ros-agent:
+    image: microros/micro-ros-agent:humble
+    container_name: micro-ros-agent
+    restart: unless-stopped
+    devices:
+      - "${DEVICE_PATH:-/dev/ttyUSB0}:${DEVICE_PATH:-/dev/ttyUSB0}"
+    group_add:
+      - dialout
+    cap_add:
+      - SYS_RAWIO
+    command: serial --dev ${DEVICE_PATH:-/dev/ttyUSB0} --baud ${BAUD_RATE:-115200} -v6
+    environment:
+      - DEVICE_PATH=${DEVICE_PATH:-/dev/ttyUSB0}
+      - BAUD_RATE=${BAUD_RATE:-115200}
+    stdin_open: true
+    tty: true
+    profiles:
+      - agent
+
+  micro-ros-base:
+    image: microros/base:humble
+    container_name: micro-ros-base
+    restart: "no"
+    devices:
+      - "${DEVICE_PATH:-/dev/ttyUSB0}:${DEVICE_PATH:-/dev/ttyUSB0}"
+    group_add:
+      - dialout
+    cap_add:
+      - SYS_RAWIO
+    command: bash
+    environment:
+      - DEVICE_PATH=${DEVICE_PATH:-/dev/ttyUSB0}
+    stdin_open: true
+    tty: true
+    volumes:
+      - .:/workspace
+    working_dir: /workspace
+    profiles:
+      - base
+      - development
+
+networks:
+  default:
+    name: microros-network
