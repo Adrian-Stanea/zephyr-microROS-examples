@@ -10,6 +10,12 @@ This directory contains example applications that demonstrate how to use Zephyr'
 - **[adc-sequence-pub:](./adc-sequence-pub/README.md)**
   *Publishes buffers of ADC samples from multiple channels to ROS2 topics, showcasing advanced sequence sampling.*
 
+## DAC
+
+- **[dac-dt-sub:](./dac-dt-sub/README.md)**
+  *Subscribes to a ROS2 topic and outputs received values to a DAC channel using
+  Zephyr's generic DAC API.*
+
 ## GPIO
 
 - **[blinky-controller-sub](./blinky-controller-sub/README.md)**

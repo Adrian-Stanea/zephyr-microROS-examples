@@ -1,0 +1,32 @@
+
+/ {
+    zephyr,user {
+        dac = <&ad559x_dac>;
+        dac-channel-id = <0>;
+        dac-resolution = <12>;
+    };
+};
+
+&spi3 {
+    status = "okay";
+
+    ad559x@0 {
+        compatible = "adi,ad559x";
+        status = "okay";
+        reg = <0>;
+
+        spi-max-frequency = <DT_FREQ_M(1)>;
+        spi-cpol;
+
+        reset-gpios = <&gpio0 15 (GPIO_ACTIVE_LOW)>;
+
+        ad559x_dac: dac {
+            compatible = "adi,ad559x-dac";
+            status = "okay";
+            #io-channel-cells = <1>;
+        };
+    };
+};
+
+// Used in micro-ROS transport configuration
+usart1: &uart0 {};
