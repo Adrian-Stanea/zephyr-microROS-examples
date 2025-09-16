@@ -1,0 +1,30 @@
+# Copyright (c) 2025 Analog Devices, Inc.
+# SPDX-License-Identifier: Apache-2.0
+
+# ==============================================================================
+# PUBLISHER CONFIGURATION
+# ==============================================================================
+
+menu "Publisher Configuration"
+
+config TOPIC_PUBLISH_PERIOD_MS
+	int "Publishing period in milliseconds"
+	default 100
+	help
+	  How often to publish sensor data to ROS topics.
+	  Lower values provide higher update rates but increase
+	  network traffic and CPU usage.
+
+config TOPIC_PREFIX
+	string "Topic name prefix"
+	default "sensor"
+	help
+	  Prefix for all sensor topic names.
+
+endmenu # Publisher Configuration
+
+source "Kconfig.zephyr"
+
+module = APP
+module-str = APP
+source "subsys/logging/Kconfig.template.log_config"

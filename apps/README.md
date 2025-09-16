@@ -16,6 +16,11 @@ This directory contains example applications that demonstrate how to use Zephyr'
   *Subscribes to a ROS2 topic and outputs received values to a DAC channel using
   Zephyr's generic DAC API.*
 
+## Sensor
+
+- **[sensor-pub:](./sensor-pub/README.md)**
+  *Streams accelerometer sensor data to ROS2 topics using Zephyr's sensor API and device tree configuration.*
+
 ## GPIO
 
 - **[blinky-controller-sub](./blinky-controller-sub/README.md)**
